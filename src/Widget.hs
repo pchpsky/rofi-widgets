@@ -55,6 +55,9 @@ showIcons = prop "show-icons"
 displayDrun :: Text -> Widget -> Widget
 displayDrun = prop "display-drun"
 
+displayRun :: Text -> Widget -> Widget
+displayRun = prop "display-run"
+
 drunDisplayFormat :: Text -> Widget -> Widget
 drunDisplayFormat = prop "drun-display-format"
 

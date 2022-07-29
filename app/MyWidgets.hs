@@ -29,6 +29,86 @@ bgcSelected = rgba 0x1f 0x24 0x30 0x55
 foreground :: Color
 foreground = rgba 0xcc 0xca 0xc2 0xff
 
+run :: Widget
+run = buildWidget do
+  font "RobotoMono Nerd Font 11"
+  showIcons False
+  displayRun "$ "
+  disableHistory False
+  sidebarMode False
+
+  globals do
+    borderColor (rgba 0x3f 0x9c 0xe8 0xaa)
+
+  window do
+    transparencyReal
+    backgroundColor bgc
+    border1 (px 3)
+    borderColor bgcSelected
+    borderRadius1 (px 5)
+    width (px 480)
+    height (px 640)
+
+  mainbox do
+    backgroundColor bgcAlt
+    children ["inputbar", "listview"]
+    spacing (px 15)
+    padding1 (px 15)
+
+  inputbar do
+    children ["prompt", "entry"]
+    backgroundColor bgcAlt
+    textColor foreground
+    expand False
+    border1 (px 1)
+    borderRadius1 (px 5)
+    padding2 (px 10) (px 15)
+
+  prompt do
+    enabled True
+    backgroundColor bgcAlt
+    textColor foreground
+
+  entry do
+    backgroundColor bgcAlt
+    textColor foreground
+    placeholderColor foreground
+    expand True
+    horizontalAlign 0
+    blink True
+
+  listview do
+    backgroundColor bgcAlt
+    columns 1
+    lines 10
+    spacing (px 0)
+    layout Vertical
+    fixedColumns True
+    fixedHeight True
+    cycle True
+
+  element do
+    backgroundColor bgcAlt
+    textColor foreground
+    orientation Horizontal
+    borderRadius1 (px 0)
+    padding1 (px 8)
+    spacing (px 10)
+    height (px 30)
+
+  elementText do
+    backgroundColor bgcAlt
+    textColor foreground
+    expand True
+    verticalAlign 0.5
+
+  elementSelected do
+    backgroundColor bgcSelected
+    textColor foreground
+    border1 (px 1)
+    borderRadius1 (px 5)
+    borderColor (rgba 0x3f 0x9c 0xe8 0xaa)
+
 launcher :: Widget
 launcher = buildWidget do
   font "RobotoMono Nerd Font 11"

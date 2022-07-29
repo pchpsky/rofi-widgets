@@ -23,7 +23,7 @@ common common-ghc-options
     -Wall -Wcompat -Werror -Widentities -Wincomplete-record-updates
     -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
     -fhide-source-paths -Wno-unused-do-bind -fshow-hole-constraints
-    -Wno-missed-extra-shared-lib
+    -Wno-missed-extra-shared-lib -Wno-missing-signatures
 
 common common-extensions
   default-extensions:
