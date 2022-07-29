@@ -12,16 +12,21 @@ instance IsElement Globals where
   props (Globals p) = p
   updateProps f (Globals p) = Globals (f p)
 
-globals :: Globals
-globals = Globals []
+type ElementBuilder e = (e -> e) -> Widget -> Widget
+
+globals :: ElementBuilder Globals
+globals = buildElement (Globals [])
+
+buildElement :: IsElement e => e -> (e -> e) -> Widget -> Widget
+buildElement e b w = w {elements = elements w ++ [Element $ b e]}
 
 instance IsElement Widget where
   name _ = "configuration"
   props = configuration
   updateProps f w = w {configuration = f (configuration w)}
 
-widget :: Widget
-widget = Widget [] []
+buildWidget :: (Widget -> Widget) -> Widget
+buildWidget f = f $ Widget [] []
 
 var :: IsPropertyValue v => PropertyName -> v -> Widget -> Widget
 var n v w = w {configuration = configuration w ++ [Property n (toPropertyValue v)]}

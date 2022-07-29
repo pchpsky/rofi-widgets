@@ -2,6 +2,7 @@ module Element.Listview where
 
 import Element
 import Property
+import Widget
 
 newtype Listview = Listview [Property]
 
@@ -12,8 +13,8 @@ instance IsElement Listview where
 
 instance HasSpacing Listview
 
-listview :: Listview
-listview = Listview []
+listview :: ElementBuilder Listview
+listview = buildElement $ Listview []
 
 columns :: Integer -> Listview -> Listview
 columns = prop "columns"
@@ -51,11 +52,11 @@ instance HasSpacing ListviewElement
 
 instance HasHeight ListviewElement
 
-element :: ListviewElement
-element = ListviewElement []
+element :: ElementBuilder ListviewElement
+element = buildElement $ ListviewElement []
 
-elementSelected :: ListviewElement
-elementSelected = ListviewElementSelected []
+elementSelected :: ElementBuilder ListviewElement
+elementSelected = buildElement $ ListviewElementSelected []
 
 orientation :: Orientation -> ListviewElement -> ListviewElement
 orientation = prop "orientation"
@@ -71,8 +72,8 @@ instance HasTextColor ListviewIcon
 
 instance HasAlign ListviewIcon
 
-elementIcon :: ListviewIcon
-elementIcon = ListviewIcon []
+elementIcon :: ElementBuilder ListviewIcon
+elementIcon = buildElement $ ListviewIcon []
 
 size :: Distance -> ListviewIcon -> ListviewIcon
 size = prop "size"
@@ -90,5 +91,5 @@ instance HasExpand ListviewText
 
 instance HasAlign ListviewText
 
-elementText :: ListviewText
-elementText = ListviewText []
+elementText :: ElementBuilder ListviewText
+elementText = buildElement $ ListviewText []

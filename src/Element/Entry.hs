@@ -2,6 +2,7 @@ module Element.Entry where
 
 import Element
 import Property
+import Widget
 
 newtype Entry = Entry [Property]
 
@@ -10,8 +11,8 @@ instance IsElement Entry where
   props (Entry p) = p
   updateProps f (Entry p) = Entry $ f p
 
-entry :: Entry
-entry = Entry []
+entry :: ElementBuilder Entry
+entry = buildElement (Entry [])
 
 instance HasTextColor Entry
 

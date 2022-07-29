@@ -2,6 +2,7 @@ module Element.Inputbar where
 
 import Element
 import Property
+import Widget
 
 newtype Inputbar = Inputbar [Property]
 
@@ -10,8 +11,8 @@ instance IsElement Inputbar where
   props (Inputbar p) = p
   updateProps f (Inputbar p) = Inputbar $ f p
 
-inputbar :: Inputbar
-inputbar = Inputbar []
+inputbar :: ElementBuilder Inputbar
+inputbar = buildElement $ Inputbar []
 
 instance HasChildren Inputbar
 

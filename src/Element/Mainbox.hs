@@ -2,6 +2,7 @@ module Element.Mainbox where
 
 import Element
 import Property
+import Widget
 
 newtype Mainbox = Mainbox [Property]
 
@@ -10,8 +11,8 @@ instance IsElement Mainbox where
   props (Mainbox p) = p
   updateProps f (Mainbox p) = Mainbox $ f p
 
-mainbox :: Mainbox
-mainbox = Mainbox []
+mainbox :: ElementBuilder Mainbox
+mainbox = buildElement $ Mainbox []
 
 instance HasSpacing Mainbox
 

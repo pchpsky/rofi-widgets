@@ -4,6 +4,7 @@ module Element.Window where
 
 import Element
 import Property
+import Widget
 
 newtype Window = Window [Property]
 
@@ -18,5 +19,5 @@ instance HasWidth Window
 
 instance HasHeight Window
 
-window :: Window
-window = Window []
+window :: ElementBuilder Window
+window = buildElement $ Window []

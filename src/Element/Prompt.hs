@@ -2,6 +2,7 @@ module Element.Prompt where
 
 import Element
 import Property
+import Widget
 
 newtype Prompt = Prompt [Property]
 
@@ -10,7 +11,7 @@ instance IsElement Prompt where
   props (Prompt p) = p
   updateProps f (Prompt p) = Prompt $ f p
 
-prompt :: Prompt
-prompt = Prompt []
+prompt :: ElementBuilder Prompt
+prompt = buildElement $ Prompt []
 
 instance HasTextColor Prompt
