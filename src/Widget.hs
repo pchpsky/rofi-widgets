@@ -25,11 +25,16 @@ instance IsElement Widget where
   props = configuration
   updateProps f w = w {configuration = f (configuration w)}
 
+instance HasFont Widget
+
 buildWidget :: (Widget -> Widget) -> Widget
 buildWidget f = f $ Widget [] []
 
 var :: IsPropertyValue v => PropertyName -> v -> Widget -> Widget
 var n v w = w {configuration = configuration w ++ [Property n (toPropertyValue v)]}
+
+(>>) :: (a -> b) -> (b -> c) -> a -> c
+(>>) = (>>>)
 
 (#) :: IsElement e => Widget -> e -> Widget
 w # el = w {elements = elements w ++ [Element el]}
@@ -45,9 +50,6 @@ toThemeStr w = mconcat $ intersperse "\n" $ elementToThemeStr <$> (Element w : e
 
     propertyToThemeStr :: Property -> Text
     propertyToThemeStr (Property n (PropertyValue v)) = "  " <> n <> ": " <> v <> ";\n"
-
-font :: Text -> Widget -> Widget
-font = prop "font"
 
 showIcons :: Bool -> Widget -> Widget
 showIcons = prop "show-icons"

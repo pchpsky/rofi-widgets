@@ -91,5 +91,7 @@ instance HasExpand ListviewText
 
 instance HasAlign ListviewText
 
+instance HasFont ListviewText
+
 elementText :: ElementBuilder ListviewText
 elementText = buildElement $ ListviewText []

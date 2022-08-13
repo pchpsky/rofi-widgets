@@ -1,4 +1,8 @@
 cradle:
   cabal:
     - path: "./app"
+    - path: "./powermenu"
+    - path: "./launcher"
+    - path: "./run"
     - path: "./src"
+    - path: "./config"

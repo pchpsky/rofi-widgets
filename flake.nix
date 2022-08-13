@@ -14,25 +14,26 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         haskellPackages = pkgs.haskellPackages.override {
-          # overrides = self: super: rec {
-          #   relude = super.relude_1_0_0_1;
-          # };
+          overrides = self: super: rec {
+            relude = super.relude_1_1_0_0;
+            doctest = super.doctest_0_20_0;
+          };
         };
 
         jailbreakUnbreak = pkg:
           pkgs.haskell.lib.doJailbreak (pkg.overrideAttrs (_: { meta = { }; }));
 
-        packageName = "rofi-widgets";
+        rofi-widgets = haskellPackages.callCabal2nix "rofi-widgets" ./. rec {};
 
-        package = haskellPackages.callCabal2nix packageName self rec {
-            # Dependency overrides go here
-        };
+        powermenu = haskellPackages.callCabal2nix "rofi-widgets-powermenu" ./. rec {};
       in {
-        packages.${packageName} = package;
+        packages.rofi-widgets = rofi-widgets;
+        legacyPackages.rofi-widgets = rofi-widgets;
 
-        legacyPackages.${packageName} = package;
+        packages.rofi-widgets-powermenu = powermenu;
+        legacyPackages.rofi-widgets-powermenu = powermenu;
 
-        defaultPackage = self.packages.${system}.${packageName};
+        defaultPackage = self.packages.${system}.rofi-widgets;
 
         devShell = pkgs.mkShell {
           buildInputs = with haskellPackages; [

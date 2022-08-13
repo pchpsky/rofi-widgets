@@ -1,3 +1,4 @@
 {
-  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix"
+  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+  "terminal.integrated.shellIntegration.enabled": false
 }

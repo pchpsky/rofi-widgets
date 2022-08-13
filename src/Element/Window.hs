@@ -15,9 +15,13 @@ instance IsElement Window where
 
 instance HasTransparency Window
 
+instance HasTextColor Window
+
 instance HasWidth Window
 
 instance HasHeight Window
+
+instance HasExpand Window
 
 window :: ElementBuilder Window
 window = buildElement $ Window []

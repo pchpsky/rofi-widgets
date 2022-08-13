@@ -152,3 +152,7 @@ class IsElement e => HasAlign e where
 class IsElement e => HasBlink e where
   blink :: Bool -> e -> e
   blink = prop "blink"
+
+class IsElement e => HasFont e where
+  font :: Text -> e -> e
+  font = prop "font"
