@@ -1,5 +1,6 @@
 module Widget where
 
+import ColorScheme
 import Element
 import Property
 
@@ -68,3 +69,12 @@ disableHistory = prop "disable-history"
 
 sidebarMode :: Bool -> Widget -> Widget
 sidebarMode = prop "sidebar-mode"
+
+colorScheme :: ColorScheme -> Widget -> Widget
+colorScheme (ColorScheme {..}) = do
+  prop "background" background
+  prop "background-alt" backgroundAlt
+  prop "foreground" foreground
+  prop "selected" selected
+  prop "active" active
+  prop "urgentt" urgent

@@ -19,3 +19,5 @@ instance HasChildren Inputbar
 instance HasTextColor Inputbar
 
 instance HasExpand Inputbar
+
+instance HasSpacing Inputbar

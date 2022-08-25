@@ -13,6 +13,8 @@ instance IsElement Listview where
 
 instance HasSpacing Listview
 
+instance HasTextColor Listview
+
 listview :: ElementBuilder Listview
 listview = buildElement $ Listview []
 
@@ -34,17 +36,27 @@ fixedHeight = prop "fixed-height"
 cycle :: Bool -> Listview -> Listview
 cycle = prop "cycle"
 
-data ListviewElement = ListviewElement [Property] | ListviewElementSelected [Property]
+data ListviewElement
+  = ListviewElement [Property]
+  | ListviewElementSelected [Property]
+  | ListviewElementSelectedNormal [Property]
+  | ListviewElementNormalNormal [Property]
 
 instance IsElement ListviewElement where
   name (ListviewElement _) = "element"
   name (ListviewElementSelected _) = "element selected"
+  name (ListviewElementSelectedNormal _) = "element selected.normal"
+  name (ListviewElementNormalNormal _) = "element normal.normal"
 
   props (ListviewElement p) = p
   props (ListviewElementSelected p) = p
+  props (ListviewElementSelectedNormal p) = p
+  props (ListviewElementNormalNormal p) = p
 
   updateProps f (ListviewElement p) = ListviewElement $ f p
   updateProps f (ListviewElementSelected p) = ListviewElementSelected $ f p
+  updateProps f (ListviewElementSelectedNormal p) = ListviewElementSelectedNormal $ f p
+  updateProps f (ListviewElementNormalNormal p) = ListviewElementNormalNormal $ f p
 
 instance HasTextColor ListviewElement
 
@@ -57,6 +69,12 @@ element = buildElement $ ListviewElement []
 
 elementSelected :: ElementBuilder ListviewElement
 elementSelected = buildElement $ ListviewElementSelected []
+
+elementSelectedNormal :: ElementBuilder ListviewElement
+elementSelectedNormal = buildElement $ ListviewElementSelectedNormal []
+
+elementNormalNormal :: ElementBuilder ListviewElement
+elementNormalNormal = buildElement $ ListviewElementNormalNormal []
 
 orientation :: Orientation -> ListviewElement -> ListviewElement
 orientation = prop "orientation"
@@ -95,3 +113,13 @@ instance HasFont ListviewText
 
 elementText :: ElementBuilder ListviewText
 elementText = buildElement $ ListviewText []
+
+newtype Scrollbar = Scrollbar [Property]
+
+instance IsElement Scrollbar where
+  name _ = "scrollbar"
+  props (Scrollbar p) = p
+  updateProps f (Scrollbar p) = Scrollbar $ f p
+
+scrollbar :: ElementBuilder Scrollbar
+scrollbar = buildElement $ Scrollbar []

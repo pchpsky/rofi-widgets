@@ -116,6 +116,7 @@ library
   import: common-relude
 
   exposed-modules:
+    ColorScheme
     Widget
     Element
     Element.Window

@@ -25,3 +25,9 @@ instance HasExpand Window
 
 window :: ElementBuilder Window
 window = buildElement $ Window []
+
+location :: Location -> Window -> Window
+location = prop "location"
+
+anchor :: Location -> Window -> Window
+anchor = prop "anchor"

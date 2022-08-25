@@ -1,5 +1,6 @@
 module Main where
 
+import ColorScheme (onedark)
 import Data.Text
 import Shelly
 import qualified Theme
@@ -13,4 +14,4 @@ main = shelly runRun
 runRun :: Sh ()
 runRun =
   escaping False . cmd . unpack $
-    "rofi -no-lazy-grab -show run -modi run -theme <( echo '" <> toThemeStr Theme.run <> "' )"
+    "rofi -no-lazy-grab -show run -modi run -theme <( echo '" <> toThemeStr (Theme.run onedark) <> "' )"

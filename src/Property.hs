@@ -72,10 +72,12 @@ instance IsPropertyValue Padding where
     propertyValueFromTokens
       [getDistance top, getDistance right, getDistance bottom, getDistance left]
 
-data Color = Rgba Integer Integer Integer Integer
+data Color = Rgba Integer Integer Integer Integer | Transparent | Inherit
 
 instance IsPropertyValue Color where
   toPropertyValue (Rgba r g b a) = PropertyValue $ "#" <> mconcat (fmap (fromString . printf "%02x") [r, g, b, a])
+  toPropertyValue Transparent = PropertyValue "transparent"
+  toPropertyValue Inherit = PropertyValue "inherit"
 
 rgba :: Integer -> Integer -> Integer -> Integer -> Color
 rgba = Rgba
@@ -115,12 +117,13 @@ instance IsPropertyValue Border where
     propertyValueFromTokens
       [getDistance top, getLineStyle topLS, getDistance right, getLineStyle rightLS, getDistance bottom, getLineStyle bottomLS, getDistance left, getLineStyle leftLS]
 
-data Cursor = Default | Pointer | Text
+data Cursor = Default | Pointer | Text | CursorInherit
 
 instance IsPropertyValue Cursor where
   toPropertyValue Default = PropertyValue "default"
   toPropertyValue Pointer = PropertyValue "pointer"
   toPropertyValue Text = PropertyValue "text"
+  toPropertyValue CursorInherit = PropertyValue "inherit"
 
 data ImageScale = None | Both | Width | Height
 
@@ -145,3 +148,8 @@ data Orientation = Horizontal | Vertical
 instance IsPropertyValue Orientation where
   toPropertyValue Horizontal = PropertyValue "horizontal"
   toPropertyValue Vertical = PropertyValue "vertical"
+
+data Location = Center
+
+instance IsPropertyValue Location where
+  toPropertyValue Center = PropertyValue "center"
