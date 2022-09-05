@@ -127,7 +127,6 @@ library
     Element.Listview
     Property
     Rofi
-    Exp
 
   build-depends:
     , base >=4.14
