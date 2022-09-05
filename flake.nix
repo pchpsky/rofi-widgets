@@ -23,17 +23,17 @@
         jailbreakUnbreak = pkg:
           pkgs.haskell.lib.doJailbreak (pkg.overrideAttrs (_: { meta = { }; }));
 
-        rofi-widgets = haskellPackages.callCabal2nix "rofi-widgets" ./. rec {};
+        widgets = haskellPackages.callCabal2nix "widgets" ./. rec {};
 
-        powermenu = haskellPackages.callCabal2nix "rofi-widgets-powermenu" ./. rec {};
+        powermenu = haskellPackages.callCabal2nix "widgets-powermenu" ./. rec {};
       in {
-        packages.rofi-widgets = rofi-widgets;
-        legacyPackages.rofi-widgets = rofi-widgets;
+        packages.widgets = widgets;
+        legacyPackages.widgets = widgets;
 
-        packages.rofi-widgets-powermenu = powermenu;
-        legacyPackages.rofi-widgets-powermenu = powermenu;
+        packages.widgets-powermenu = powermenu;
+        legacyPackages.widgets-powermenu = powermenu;
 
-        defaultPackage = self.packages.${system}.rofi-widgets;
+        defaultPackage = self.packages.${system}.widgets;
 
         devShell = pkgs.mkShell {
           buildInputs = with haskellPackages; [
