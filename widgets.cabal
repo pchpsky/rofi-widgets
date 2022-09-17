@@ -34,7 +34,7 @@ common common-extensions
 
 common common-relude
   build-depends:
-    relude ^>= 1.1.0.0
+    relude ^>= 1.0.0.0
 
   mixins:
     , base hiding (Prelude)
@@ -109,6 +109,43 @@ executable run
 
   default-extensions:
     OverloadedStrings
+
+executable topbar
+  import: common-ghc-options
+  import: common-extensions
+  import: common-relude
+
+  main-is: Main.hs
+
+  other-modules:
+    UI.Strut
+    UI.Workspaces
+    UI.Spotify
+    UI.Powermenu
+    UI.Clock
+    UI.System
+    UI.Volume
+
+  build-depends:
+    , base >=4.14
+    , widgets
+    , config
+    , shelly
+    , gi-gtk ^>= 4.0.5
+    , gi-gdk
+    , gi-gio
+    , gi-gdkx11
+    , X11
+    , haskell-gi-base
+    , fsnotify
+
+  hs-source-dirs: topbar
+
+  default-language: Haskell2010
+
+  default-extensions:
+    OverloadedStrings
+    OverloadedLabels
 
 library
   import: common-ghc-options

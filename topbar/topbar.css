@@ -1,0 +1,61 @@
+@define-color background #1E2127;
+@define-color backgroundAlt #282B31FF;
+@define-color foreground #FFFFFFFF;
+@define-color selected #61AFEFFF;
+@define-color active #98C379FF;
+@define-color urgent #E06C75FF;
+
+.bar-window {
+  all: unset;
+  font-family: "RobotoMono Nerd Font", sans-serif;
+  font-size: 11pt;
+  color:
+    /*@foreground*/
+    #FFFFFFFF;
+}
+
+.bar-mainbox {
+  border-radius: 5px;
+  background-color:
+    /* @background */
+    #1E2127;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 1px;
+}
+
+.volume-container {
+  margin: 0px 15px;
+}
+
+.volume-icon {
+  font-size: 18px;
+  font-weight: bolder;
+  margin-right: 3px;
+}
+
+.volume-slider trough highlight {
+  background-color: #61AFEFFF;
+  border-radius: 10px;
+}
+
+.volume-slider {
+  margin-left: 5px;
+}
+
+slider {
+  margin: -7px;
+  min-width: 14px;
+  min-height: 14px;
+}
+
+scale trough {
+  all: unset;
+  background-color: #282B31;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #afcee055;
+  min-height: 10px;
+  min-width: 80px;
+}
