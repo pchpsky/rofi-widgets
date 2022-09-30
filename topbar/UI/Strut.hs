@@ -11,7 +11,7 @@ import qualified GI.Gdk as Gdk
 import GI.GdkX11
 import GI.Gio (listModelGetItem, listModelGetNItems)
 import GI.Gtk (Window, nativeGetSurface, windowDisplay)
-import Graphics.X11 (Atom, Display (Display), aTOM, cARDINAL, geometry, heightOfScreen, internAtom, moveResizeWindow, moveWindow, screenCount, screenOfDisplay, sync, wM_NAME, widthOfScreen)
+import Graphics.X11 (Atom, Display (Display), aTOM, cARDINAL, geometry, getAtomName, heightOfScreen, internAtom, moveResizeWindow, moveWindow, screenCount, screenOfDisplay, sync, wM_NAME, widthOfScreen)
 import Graphics.X11.Xlib.Extras
 import Prelude hiding (get)
 
@@ -27,18 +27,6 @@ data StrutConfig = StrutConfig
     strutMonitor :: Maybe Word32
   }
   deriving (Show)
-
-_NET_WM_WINDOW_TYPE :: Atom
-_NET_WM_WINDOW_TYPE = 359
-
-_NET_WM_WINDOW_TYPE_DOCK :: Atom
-_NET_WM_WINDOW_TYPE_DOCK = 395
-
-_NET_WM_STRUT_PARTIAL :: Atom
-_NET_WM_STRUT_PARTIAL = 411
-
-_NET_WM_STRUT :: Atom
-_NET_WM_STRUT = 410
 
 setupStrutWindow :: StrutConfig -> Window -> IO ()
 setupStrutWindow strutConfig window = do
@@ -73,6 +61,10 @@ setupStrutWindow strutConfig window = do
         topStartX = xPos - strutOffsetX strutConfig
         topEndX = xPos + width + strutOffsetX strutConfig - 1
         wmStrutProps = [0, 0, fromIntegral top, 0, 0, 0, 0, 0, fromIntegral topStartX, fromIntegral topEndX, 0, 0]
+
+    _NET_WM_WINDOW_TYPE <- internAtom display "_NET_WM_WINDOW_TYPE" False
+    _NET_WM_WINDOW_TYPE_DOCK <- internAtom display "_NET_WM_WINDOW_TYPE_DOCK" False
+    _NET_WM_STRUT_PARTIAL <- internAtom display "_NET_WM_STRUT_PARTIAL" False
 
     changeProperty32 display (fromIntegral surfaceXid) _NET_WM_WINDOW_TYPE aTOM propModeReplace [fromIntegral _NET_WM_WINDOW_TYPE_DOCK]
     moveResizeWindow display (fromIntegral surfaceXid) xPos yPos (fromIntegral width) (fromIntegral height)

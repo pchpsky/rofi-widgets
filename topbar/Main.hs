@@ -25,9 +25,7 @@ main = do
   app <- new Application [#applicationId := appId]
   on app #startup (void loadCSS)
   on app #activate (buildUI app)
-  fork $ #run app Nothing
-  where
-    fork = void . forkIO . void
+  void $ #run app Nothing
 
 loadCSS :: IO CssProvider
 loadCSS = do
@@ -87,7 +85,7 @@ buildUI app = do
   let strutConfig =
         StrutConfig
           { strutWidth = ScreenRatio 1,
-            strutHeight = ExactSize 40,
+            strutHeight = ExactSize 38,
             strutOffsetX = 0,
             strutOffsetY = 0,
             strutMonitor = Just 1

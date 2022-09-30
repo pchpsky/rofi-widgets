@@ -115,9 +115,13 @@ executable topbar
   import: common-extensions
   import: common-relude
 
+  ghc-options:
+    -threaded
+
   main-is: Main.hs
 
   other-modules:
+    Debounce
     UI.Strut
     UI.Workspaces
     UI.Spotify
@@ -138,6 +142,8 @@ executable topbar
     , X11
     , haskell-gi-base
     , fsnotify
+    , turtle
+    , foldl
 
   hs-source-dirs: topbar
 
