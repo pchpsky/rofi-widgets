@@ -6,7 +6,6 @@ import Data.Text (strip)
 import Rofi
 import Shelly (Sh, cmd, escaping, shelly)
 import qualified Theme
-import Prelude hiding (Option)
 
 main :: IO ()
 main = shelly $ do
